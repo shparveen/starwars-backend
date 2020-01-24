@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'recruitment-test-mysql.caqylurhpyhw.eu-west-1.rds.amazonaws.com',
+	'username' => 'candidate',
+	'password' => 'PrototypeRocks123654',
 	'database' => 'starwars',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
