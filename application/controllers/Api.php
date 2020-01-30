@@ -36,6 +36,17 @@ class Api extends CI_Controller {
 		$data = array();
 		$data = $this->ApiOperation->getMostAppearCharacter();
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
-	}	
+	}
+	
+	/*
+     * Get StarWars Species details from this method.
+     * @param
+     * @return Response
+    */	
+	public function starWarsSpecies(){
+		$data = array();
+		$data = $this->ApiOperation->getStarWarSpecies();
+		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+	}
 	
 }
