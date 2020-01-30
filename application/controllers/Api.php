@@ -26,4 +26,16 @@ class Api extends CI_Controller {
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
 	}
 	
+	
+  /*
+     * Get Most Appear Character from this method.
+     * @param
+     * @return Response
+    */	
+	public function mostAppearCharacter(){
+		$data = array();
+		$data = $this->ApiOperation->getMostAppearCharacter();
+		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+	}	
+	
 }
