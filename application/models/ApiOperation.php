@@ -36,4 +36,19 @@ class ApiOperation extends CI_Model {
 	return $qResult;  
   }
 	
+function getPlanetVehilePilotsCount(){
+	$qResult = array();
+	$sql = "SELECT (SELECT name from planets WHERE id=fp.planet_id) as planet_name, fp.planet_id, count(DISTINCT(vp.people_id)) as total_vehicle_pilots  FROM `films_planets` as fp, films_vehicles as fv, vehicles_pilots as vp WHERE fp.film_id  = fv.film_id and fv.vehicle_id = vp.vehicle_id group by fp.planet_id order by total_vehicle_pilots desc";
+	$qResult =  $this->db->query($sql)->result();
+	return $qResult; 
+  }
+  
+  function getPlanetPilotsDetail($planet_id){
+	$qResult = array();
+	$sql = "SELECT  DISTINCT(SELECT p.name from people p WHERE p.id= vp.people_id) as pilot_name,  ( SELECT  ( SELECT name from species s where  s.id = sp.species_id ) as species_name FROM species_people as sp  WHERE sp.people_id = vp.people_id ) as species_id FROM `films_planets` as fp, films_vehicles as fv, vehicles_pilots as vp WHERE fp.film_id  = fv.film_id and fv.vehicle_id = vp.vehicle_id  and fp.planet_id = $planet_id";
+	$qResult =  $this->db->query($sql)->result();
+
+	return $qResult; 
+  }
+	
 }
