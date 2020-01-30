@@ -12,5 +12,8 @@ STEPS to use rest api's in any web app.
 		 4. <BASEURL>/api/planetVehiclePilotsDetail
 	
 2) set BASE_URL in fronend react app
+
+
+DEMO URL :- http://ec2-13-232-193-139.ap-south-1.compute.amazonaws.com/starapp/
 	
 	
