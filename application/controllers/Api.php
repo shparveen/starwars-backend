@@ -13,7 +13,18 @@ class Api extends CI_Controller {
 		 $this->load->model('ApiOperation');
 	}
 	
-  /*
+	 /**
+     * Get Plants Data from this method.
+     * @param $id
+     * @return Response
+    */
+	public function Planets($id = 0)
+	{
+        $data = $this->ApiOperation->getPlanets($id);     
+		return $this->output->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+	}
+	
+	/*
      * Get Longest Crawl from this method.
      * @param
      * @return Response
@@ -23,11 +34,11 @@ class Api extends CI_Controller {
 
 		$data = array();
 		$data = $this->ApiOperation->getLongestCrawl();
+		$this->output->set_header('Cache-Control: post-check=0, pre-check=0');
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
 	}
 	
-	
-   /*
+	/*
      * Get Most Appear Character from this method.
      * @param
      * @return Response
@@ -36,18 +47,8 @@ class Api extends CI_Controller {
 		$data = array();
 		$data = $this->ApiOperation->getMostAppearCharacter();
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
-	}
+	}	
 	
-   /*
-     * Get StarWars Species details from this method.
-     * @param
-     * @return Response
-    */	
-	public function starWarsSpecies(){
-		$data = array();
-		$data = $this->ApiOperation->getStarWarSpecies();
-		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
-	}
 	/*
      * Get StarWars Species details from this method.
      * @param
@@ -60,7 +61,7 @@ class Api extends CI_Controller {
 	}	
 	
 	
-/*
+	/*
      * Get Planet Vehicle Pilots from this method.
      * @param
      * @return Response
@@ -92,6 +93,5 @@ class Api extends CI_Controller {
 			}			
 		}
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($resData));
-	} 	
-	
+	} 
 }
