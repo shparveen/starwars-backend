@@ -29,4 +29,11 @@ class ApiOperation extends CI_Model {
 	return $qResult;	
   }
 	
+  function getStarWarSpecies(){
+	$qResult = array();
+	$sql = "SELECT  (SELECT name from species where id = fs.`species_id` ) as species_name, (SELECT COUNT(DISTINCT(people_id)) from species_people where species_id = fs.`species_id`) as number_of_characters_belongsTo_species FROM `films_species` as fs GROUP By species_id having number_of_characters_belongsTo_species>2";
+	$qResult =  $this->db->query($sql)->result();
+	return $qResult;  
+  }
+	
 }
