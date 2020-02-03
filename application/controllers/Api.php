@@ -94,4 +94,35 @@ class Api extends CI_Controller {
 		}
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($resData));
 	} 
+	
+	/**
+     * Create new user from this method.
+     * @param $name
+	 * @param $email
+	 * @param $userpassword
+	 
+     * @return Response
+    */
+	public function createUser()
+	{
+		$name = $this->input->post('name');
+		$email = $this->input->post('email');
+		$userpassword = $this->input->post('userpassword');
+		if($name == '' || $email == '' || $userpassword ==''){
+		     $data = "Please enter valid data";
+		     return $this->output->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+		}
+		$userdata = array();
+        	$data = $this->ApiOperation->checkUserAlreadyExists($email);  
+		if(!empty($data) ){ 
+			$data = "User Already exists";
+		}else{ 				
+			$userdata['name'] = $name;
+			$userdata['email'] = $email; 
+			$userdata['userpassword'] = $userpassword; 
+			$data = $this->ApiOperation->createUser($userdata);	
+		}			
+		return $this->output->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+	}
+	
 }
