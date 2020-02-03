@@ -69,4 +69,12 @@ function getPlanetVehilePilotsCount(){
 		return  $userMsg;
 	  }
   }
+	
+function checkUser($username,$userpassword){
+	  if( $username != '' && $userpassword != '') {
+		  $sql= "SELECT email FROM users WHERE email = '".$username."' and userpassword = '".$userpassword."'";
+		  $qResult =  $this->db->query($sql)->result();
+		  return $qResult; 
+	  }
+  }
 }
