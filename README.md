@@ -10,6 +10,8 @@ STEPS to use rest api's in any web app.
 		 2. <BASEURL>/api/mostAppearCharacter
 		 3. <BASEURL>/api/starWarsSpecies
 		 4. <BASEURL>/api/planetVehiclePilotsDetail
+	         5. <BASEURL>/api/createUser
+	         6. <BASEURL>/api/checkLogin
 	
 2) set BASE_URL in fronend react app
 
