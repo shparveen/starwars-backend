@@ -51,4 +51,22 @@ function getPlanetVehilePilotsCount(){
 	return $qResult; 
   }
 	
+ function checkUserAlreadyExists($useremail){
+	  if(isset($useremail) && $useremail != '' ) {
+		  $sql= "SELECT id FROM users WHERE email = '".$useremail."'";
+		  $qResult =  $this->db->query($sql)->result();
+		  return $qResult; 
+	  }
+  }
+	
+  function createUser($userdata){
+	  if(!empty($userdata) && $userdata['name'] != '' && $userdata['email'] != '' && $userdata['userpassword'] != '' ){
+		$userMsg = array();
+		$this->db->insert('users', $userdata);	 
+		$insert_id = $this->db->insert_id();
+		$userMsg['user_id']	 = $insert_id;
+		$userMsg['msg'] = 'User registered successfully';
+		return  $userMsg;
+	  }
+  }
 }
