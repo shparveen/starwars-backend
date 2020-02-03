@@ -13,7 +13,7 @@ class Api extends CI_Controller {
 		 $this->load->model('ApiOperation');
 	}
 	
-	 /**
+   /**
      * Get Plants Data from this method.
      * @param $id
      * @return Response
@@ -95,9 +95,9 @@ class Api extends CI_Controller {
 		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($resData));
 	} 
 	
-	/**
-     * Create new user from this method.
-     * @param $name
+   /**
+         * Create new user from this method.
+         * @param $name
 	 * @param $email
 	 * @param $userpassword
 	 
@@ -122,7 +122,26 @@ class Api extends CI_Controller {
 			$userdata['userpassword'] = $userpassword; 
 			$data = $this->ApiOperation->createUser($userdata);	
 		}			
-		return $this->output->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
 	}
-	
+
+/**
+     * Create new user from this method.
+     * @param $username 
+     * @param $userpassword
+     * @return Response
+    */
+	public function checkLogin(){
+		$username = $this->input->post('username');
+		$userpassword = $this->input->post('userpassword');
+		
+		if($username == '' || $userpassword ==''){
+			$data = "Please enter valid username and password";
+			return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+		}
+		
+		$data = $this->ApiOperation->checkUser($username,$userpassword);  
+		
+		return $this->output->set_header('Access-Control-Allow-Origin: *')->set_content_type('application/json')->set_status_header(200)->set_output(json_encode($data));
+	}
 }
